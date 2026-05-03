@@ -1,7 +1,5 @@
 # ParkSmart — Parking Management System
 
----
-
 ## TABLE OF CONTENTS
 
 1. [Project Overview](#1-project-overview)
