@@ -5,13 +5,14 @@
 1. [Project Overview](#1-project-overview)
 2. [System Features](#2-system-features)
 3. [Database Design](#3-database-design)
-4. [Backend Architecture](#4-backend-architecture)
-5. [Frontend Design](#5-frontend-design)
-6. [Security Measures](#6-security-measures)
-7. [SQL Queries Reference](#7-sql-queries-reference)
-8. [Setup Guide (XAMPP/WAMP)](#8-setup-guide)
-9. [User Guide](#9-user-guide)
-10. [Troubleshooting](#10-troubleshooting)
+4. [Entity-Relationship Diagram (ERD)](#4-entity-relationship-diagram-erd)
+5. [Backend Architecture](#5-backend-architecture)
+6. [Frontend Design](#6-frontend-design)
+7. [Security Measures](#7-security-measures)
+8. [SQL Queries Reference](#8-sql-queries-reference)
+9. [Setup Guide (XAMPP/WAMP)](#9-setup-guide)
+10. [User Guide](#10-user-guide)
+11. [Troubleshooting](#11-troubleshooting)
 
 ---
 
@@ -163,7 +164,34 @@ parking_lots ──< parking_slots ──< parking_records >── vehicles
 
 ---
 
-## 4. BACKEND ARCHITECTURE
+## 4. ENTITY-RELATIONSHIP DIAGRAM (ERD)
+
+The following diagram represents the conceptual data model of the ParkSmart system using Chen notation. It illustrates all entities, their attributes, and the relationships between them along with their cardinalities.
+
+<p align="center">
+  <img src="assets/images/ERD.png" alt="ParkSmart ERD" width="100%">
+</p>
+
+### ERD Explanation
+
+- **ParkingLot → ParkingSlot (1:M)**  
+  One parking lot contains multiple parking slots, while each slot belongs to exactly one lot.
+
+- **ParkingSlot → ParkingRecord (1:M)**  
+  A parking slot can be used multiple times over time, but each record is linked to one slot.
+
+- **Vehicle → ParkingRecord (1:M)**  
+  A vehicle can have multiple parking sessions, but each record belongs to one vehicle.
+
+- **ParkingRecord → Payment (1:1)**  
+  Each parking record generates exactly one payment.
+
+- **Vehicle ↔ ParkingSlot (M:N via ParkingRecord)**  
+  Vehicles can occupy different slots over time, and slots can serve multiple vehicles.
+
+---
+
+## 5. BACKEND ARCHITECTURE
 
 ### Folder Structure
 ```
@@ -207,7 +235,8 @@ parking-system/
 │   └── layout.php             ← renderHead, renderSidebar, renderTopbar, renderFooter
 ├── assets/
 │   ├── css/style.css
-│   └── js/app.js
+│   ├── js/app.js
+│   └── images/ERD.png
 └── sql/
     └── parking_system.sql
 ```
@@ -262,7 +291,7 @@ function calculateFee(int $minutes): float {
 
 ---
 
-## 5. FRONTEND DESIGN
+## 6. FRONTEND DESIGN
 
 **Design Language:** Industrial / Utilitarian dark theme
 **Typography:**
@@ -296,7 +325,7 @@ function calculateFee(int $minutes): float {
 
 ---
 
-## 6. SECURITY MEASURES
+## 7. SECURITY MEASURES
 
 | Threat | Mitigation |
 |---|---|
@@ -311,7 +340,7 @@ function calculateFee(int $minutes): float {
 
 ---
 
-## 7. SQL QUERIES REFERENCE
+## 8. SQL QUERIES REFERENCE
 
 ### Core SELECT Queries
 
@@ -426,7 +455,7 @@ UPDATE parking_slots SET status = 'available' WHERE slotID = (
 
 ---
 
-## 8. SETUP GUIDE
+## 9. SETUP GUIDE
 
 ### Prerequisites
 - XAMPP (recommended) or WAMP installed
@@ -548,7 +577,7 @@ error_reporting(E_ALL);
 
 ---
 
-## 9. USER GUIDE
+## 10. USER GUIDE
 
 ### Admin Workflow
 
@@ -596,7 +625,7 @@ error_reporting(E_ALL);
 
 ---
 
-## 10. TROUBLESHOOTING
+## 11. TROUBLESHOOTING
 
 ### Common Issues
 
