@@ -195,7 +195,7 @@ The following diagram represents the conceptual data model of the ParkSmart syst
 
 ### Folder Structure
 ```
-parking-system/
+parksmart/
 ├── index.php                  ← Entry point / redirect
 ├── config/
 │   └── database.php           ← PDO connection, constants, helpers
@@ -484,7 +484,7 @@ UPDATE parking_slots SET status = 'available' WHERE slotID = (
 3. Verify the structure looks like:
    ```
    htdocs/
-   └── parking-system/
+   └── parksmart/
        ├── index.php
        ├── config/
        ├── auth/
